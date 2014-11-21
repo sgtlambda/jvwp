@@ -2,13 +2,12 @@
 
 namespace jvwp;
 
-use FlorianWolters\Component\Util\Singleton\SingletonTrait;
+use singleton\Singleton;
 
 if(class_exists('Twig_Environment')) {
 
-    class Templates
+    class Templates extends Singleton
     {
-        use SingletonTrait;
 
         private $twigLoader;
         private $twigEnvironment;

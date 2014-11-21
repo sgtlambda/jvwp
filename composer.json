@@ -4,7 +4,7 @@
     "require": {
 		"php": ">=5.3",
         "twig/twig": "~1.16",
-        "florianwolters/component-util-singleton": "~0.3"
+        "thesmart/singleton": "~0.0"
     },
     "authors": [
         {
