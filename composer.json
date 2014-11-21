@@ -11,7 +11,7 @@
             "name": "JM Versteeg",
             "email": "janmerijnversteeg@gmail.com"
         }
-    ]
+    ],
 	"autoload": {
         "psr-4": {
             "jvwp\\": "src/"
