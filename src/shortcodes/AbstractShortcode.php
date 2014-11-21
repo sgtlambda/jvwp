@@ -7,7 +7,7 @@ class AbstractShortcode
 
     private $tags;
 
-    function __construct($tags = [], $register = true)
+    function __construct($tags = array(), $register = true)
     {
         $this->tags = $tags;
         if($register){
@@ -17,10 +17,10 @@ class AbstractShortcode
 
     protected function getDefaultAtts()
     {
-        return [];
+        return array();
     }
 
-    protected function processAtts($atts = [])
+    protected function processAtts($atts = array())
     {
         return array_merge($atts, $this->getDefaultAtts());
     }

@@ -2,7 +2,7 @@
     "name": "jmversteeg/jvwp",
     "description": "High-level OOP abstractions for several WordPress features",
     "require": {
-		"php": ">=5.4",
+		"php": ">=5.3",
         "twig/twig": "~1.16",
         "florianwolters/component-util-singleton": "~0.3"
     },

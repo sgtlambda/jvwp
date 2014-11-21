@@ -15,7 +15,7 @@ if(class_exists('Twig_Environment')) {
 
         function __construct()
         {
-            $this->twigLoader = new \Twig_Loader_Filesystem([]);
+            $this->twigLoader = new \Twig_Loader_Filesystem(array());
             $this->twigEnvironment = new \Twig_Environment($this->twigLoader);
         }
 

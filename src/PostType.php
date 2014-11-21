@@ -29,26 +29,26 @@ abstract class PostType
      * @param array $options
      * @param bool $register
      */
-    function __construct($identifier, $singularName, $pluralName, $public = false, array $supports = [
+    function __construct($identifier, $singularName, $pluralName, $public = false, array $supports = array(
             self::SUPPORTS_TITLE,
             self::SUPPORTS_EDITOR
-        ], array $options = [], $register = true)
+        ), array $options = array(), $register = true)
     {
         $this->identifier = $identifier;
-        $this->options = array_merge([
+        $this->options = array_merge(array(
             'public' => $public,
             'inherit_type' => 'page',
             'supports' => $supports,
             'capability_type' => 'page',
             'show_ui' => true,
             'show_in_nav_menus' => true,
-            'labels' => [
+            'labels' => array(
                 'name' => $singularName,
                 'menu_name' => $pluralName
-            ]
-        ], $options);
+            )
+        ), $options);
         if ($register) {
-            add_action('init', [$this, 'register']);
+            add_action('init', array($this, 'register'));
         }
     }
 

@@ -9,7 +9,7 @@ if(class_exists('Twig_Template')) {
 
         private $template;
 
-        function __construct(\Twig_Template $template = null, $tags = [], $register = true)
+        function __construct(\Twig_Template $template = null, $tags = array(), $register = true)
         {
             $this->template = $template;
             parent::__construct($tags, $register);
