@@ -38,4 +38,6 @@ if(class_exists('Twig_Environment')) {
 
     }
 
+    Templates::setInstance(new Templates());
+
 }
