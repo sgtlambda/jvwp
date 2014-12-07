@@ -59,7 +59,7 @@ abstract class MetaBox
      *
      * @param $post_ID
      */
-    protected function save($post_ID)
+    public function save($post_ID)
     {
 
     }
