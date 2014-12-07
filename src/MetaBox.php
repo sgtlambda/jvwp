@@ -2,7 +2,7 @@
 
 namespace jvwp;
 
-class MetaBox
+abstract class MetaBox
 {
 
     const CONTEXT_NORMAL   = 'normal';
@@ -35,22 +35,40 @@ class MetaBox
         $this->screens  = $screens;
         $this->context  = $context;
         $this->priority = $priority;
-        if ($register)
-            $this->register();
+        if ($register) {
+            add_action('admin_menu', array($this, 'registerDisplay'));
+            add_action('wp_insert_post', array($this, 'save'));
+        }
     }
 
+    /**
+     * This method is used to output the contents of the meta box.
+     *
+     * @param $post
+     */
+    protected abstract function display($post);
+
+    /**
+     * This method is ran every time a post is saved. Update your post meta here.
+     *
+     * @param $post_ID
+     */
+    protected function save($post_ID)
+    {
+
+    }
 
     /**
      * Adds the meta box using the <code>add_meta_box()</code> function.
      * This should always be called on the <code>admin_menu</code> hook.
      */
-    function register()
+    public final function register()
     {
-        $callback = array($this, 'callback');
+        $callback = array($this, 'display');
         foreach ($this->screens as $screen) {
-            $id = $this->getPropertyForScreen($screen, $this->id);
-            $title = $this->getPropertyForScreen($screen, $this->title);
-            $context = $this->getPropertyForScreen($screen, $this->context);
+            $id       = $this->getPropertyForScreen($screen, $this->id);
+            $title    = $this->getPropertyForScreen($screen, $this->title);
+            $context  = $this->getPropertyForScreen($screen, $this->context);
             $priority = $this->getPropertyForScreen($screen, $this->priority);
             add_meta_box($id, $title, $callback, $screen, $context, $priority);
         }
