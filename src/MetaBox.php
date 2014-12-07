@@ -52,7 +52,7 @@ abstract class MetaBox
      *
      * @param $post
      */
-    protected abstract function display($post);
+    public abstract function display($post);
 
     /**
      * This method is ran every time a post is saved. Update your post meta here.
