@@ -42,7 +42,7 @@ abstract class MetaBox
         $this->context  = $context;
         $this->priority = $priority;
         if ($register) {
-            add_action('admin_menu', array($this, 'registerDisplay'));
+            add_action('admin_menu', array($this, 'register'));
             add_action('wp_insert_post', array($this, 'save'));
         }
     }
