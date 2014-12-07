@@ -18,22 +18,24 @@ class Utils
     }
 
     /**
-     * @param int $id
+     * @param int      $id
      * @param callable $callback
-     * @param array $params
+     * @param array    $callback_params
+     *
      * @return \WP_Post | null WP_Post on success or null on failure
      */
-    public static function displaySingleItemByID($id, $callback = null, array $params = array())
+    public static function displaySingleItemByID($id, $callback = null, array $callback_params = array())
     {
-        global $post;
-        $post = get_post($id);
-        if (!is_null($post)) {
+        $item = get_post($id);
+        if (!is_null($item)) {
+            global $post;
+            $post = $item;
             setup_postdata($post);
             if ($callback !== null)
-                call_user_func_array($callback, array_merge(array($post), $params));
+                call_user_func_array($callback, array_merge(array($post), $callback_params));
             wp_reset_postdata();
         }
-        return $post;
+        return $item;
     }
 
     /**
