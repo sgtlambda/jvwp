@@ -7,6 +7,6 @@ High-level OOP abstractions for commonly used WordPress functionality
 * Are you often repeating the same code over and over to perform trivial tasks such as widget or post type creation? 
 * Do you like pizza?
 
-Then **jvwp** might just be the OOP abstraction library for you!
+Then **jvwp** might just be the library for you!
 
 Our readme is still work in progress!
