@@ -20,7 +20,7 @@ abstract class MetaBox
     const PRIORITY_CORE    = 'core';
     const PRIORITY_HIGH    = 'high';
 
-    private $id, $title, $screens, $context, $priority;
+    protected $id, $title, $screens, $context, $priority;
 
     /**
      * WP Meta Box abstraction class. The class should be instantiated on the <code>admin_menu</code> hook.
@@ -41,10 +41,8 @@ abstract class MetaBox
         $this->screens  = $screens;
         $this->context  = $context;
         $this->priority = $priority;
-        if ($register) {
-            add_action('admin_menu', array($this, 'register'));
-            add_action('wp_insert_post', array($this, 'save'));
-        }
+        if ($register)
+            $this->addActions();
     }
 
     /**
@@ -68,7 +66,7 @@ abstract class MetaBox
      * Adds the meta box using the <code>add_meta_box()</code> function.
      * This should always be called on the <code>admin_menu</code> hook.
      */
-    public final function register()
+    public function register()
     {
         $callback = array($this, 'display');
         foreach ($this->screens as $screen) {
@@ -88,4 +86,19 @@ abstract class MetaBox
             return $property[$screen];
         else return $default;
     }
+
+    protected function addActions()
+    {
+        add_action('admin_menu', array($this, 'register'));
+        add_action('wp_insert_post', array($this, 'save'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 } 
