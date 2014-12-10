@@ -1,8 +1,6 @@
 <?php
 
-namespace rwmb;
-
-use jvwp\rwmb\Field;
+namespace jvwp\rwmb;
 
 class PostField extends Field {
 
