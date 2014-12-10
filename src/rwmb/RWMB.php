@@ -11,6 +11,14 @@ class RWMB extends MetaBox
 
     private $fields;
 
+    function __construct(
+        $id, $title, array $screens = array(), $fields = array(), $context = self::CONTEXT_ADVANCED,
+        $priority = self::PRIORITY_DEFAULT, $register = true
+    ) {
+        parent::__construct($id, $title, $screens, $context, $priority, $register);
+        $this->fields = $fields;
+    }
+
     /**
      * Adds the field to the MetaBox, if not present
      *
