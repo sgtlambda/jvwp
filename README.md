@@ -8,3 +8,19 @@ High-level OOP abstractions for commonly used WordPress functionality
 * Do you like pizza?
 
 Then **jvwp** might just be for you!
+
+## Installation
+
+Add to your composer.json
+
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/jmversteeg/jvwp"
+    }
+  ],
+  "require": {
+    "jmversteeg/jvwp": "dev-master"
+  }
+  
+Run `composer update`
