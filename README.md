@@ -9,7 +9,7 @@ High-level OOP abstractions for commonly used WordPress functionality
 
 Then **jvwp** might just be for you!
 
-## Installation
+### Installation
 
 Add to your composer.json
 
