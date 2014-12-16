@@ -31,7 +31,7 @@ class PostSelect extends Field
         foreach ($posts as $post) {
             $postID   = $post->ID;
             $selected = ($value !== "" && $postID === intval($value)) ? "selected" : "";
-            $label    = apply_filters("the_title", $postID);
+            $label    = apply_filters("the_title", $post->post_title);
             echo '<option ' . $selected . ' value=' . $postID . '>' . $label . '</option>';
         }
         echo '</select>';
