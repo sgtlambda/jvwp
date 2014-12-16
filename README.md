@@ -11,8 +11,6 @@ Then **jvwp** might just be for you!
 
 ### Installation
 
-1. Add to your composer.json
-
 ````json
   "repositories": [
     {
@@ -24,7 +22,7 @@ Then **jvwp** might just be for you!
     "jmversteeg/jvwp": "dev-master"
   }
 ````
-  
+1. Add that your `composer.json`
 2. Run `composer update`
 3. ???
 4. Profit
