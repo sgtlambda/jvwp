@@ -13,6 +13,7 @@ Then **jvwp** might just be for you!
 
 Add to your composer.json
 
+````json
   "repositories": [
     {
       "type": "vcs",
@@ -22,5 +23,6 @@ Add to your composer.json
   "require": {
     "jmversteeg/jvwp": "dev-master"
   }
+````
   
 Run `composer update`
