@@ -1,6 +1,6 @@
 <?php
 
-namespace jvwp;
+namespace jvwp\metaboxes;
 
 abstract class MetaBox
 {
