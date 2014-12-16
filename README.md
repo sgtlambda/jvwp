@@ -11,7 +11,7 @@ Then **jvwp** might just be for you!
 
 ### Installation
 
-Add to your composer.json
+1. Add to your composer.json
 
 ````json
   "repositories": [
@@ -25,4 +25,6 @@ Add to your composer.json
   }
 ````
   
-Run `composer update`
+2. Run `composer update`
+3. ???
+4. Profit
