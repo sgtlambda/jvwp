@@ -46,8 +46,9 @@ abstract class PostType
             'show_ui'           => true,
             'show_in_nav_menus' => true,
             'labels'            => array(
-                'name'      => $singularName,
-                'menu_name' => $pluralName
+                'name'          => $pluralName,
+                'singular_name' => $singularName,
+                'menu_name'     => $pluralName
             )
         ), $options);
         $this->taxonomies = $taxonomies;
