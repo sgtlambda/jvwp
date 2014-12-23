@@ -96,7 +96,7 @@ class Utils
     {
         $realW = $w * $pixelRatio;
         $realH = $h * $pixelRatio;
-        return Image::open($path)
+        return '/' . Image::open($path)
             ->zoomCrop($realW, $realH, 0xfffff)
             ->jpeg(90);
     }
