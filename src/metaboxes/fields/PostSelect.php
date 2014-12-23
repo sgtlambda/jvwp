@@ -37,7 +37,7 @@ class PostSelect extends Field
     {
         $posts     = Utils::getPostsByType($this->post_type, $this->extra_args);
         $fieldName = $this->getFieldName();
-        if($this->multiple)
+        if ($this->multiple)
             echo '<select multiple style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '[]">';
         else
             echo '<select style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '">';
@@ -50,14 +50,18 @@ class PostSelect extends Field
         echo '</select>';
     }
 
-    private static function isSelected($value, $id) {
-        if($value === "" || $value === null || $value === array())
+    private static function isSelected ($value, $id)
+    {
+        if ($value === "" || $value === null || $value === array())
             return false;
-        if(!is_array($value))
+        if (!is_array($value))
             $value = array($value);
-        foreach($value as $v)
-            if(intval($v) === $id)
+        foreach ($value as $v) {
+            if ($v === "")
+                continue;
+            if (intval($v) === $id)
                 return true;
+        }
         return false;
     }
 
