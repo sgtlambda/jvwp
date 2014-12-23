@@ -31,7 +31,7 @@ if(class_exists('Twig_Environment')) {
         /**
          * @param string $name
          *
-         * @return \Twig_TemplateInterface
+         * @return \Twig_Template
          */
         public static function getTemplate($name) {
             return self::getInstance()->getTwigEnvironment()->loadTemplate($name);
