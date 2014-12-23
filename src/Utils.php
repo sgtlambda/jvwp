@@ -74,7 +74,7 @@ class Utils
      *
      * @return string
      */
-    public static function getFeaturedImageUrl ($post_id = null, $size = 'full', $default = '')
+    public static function getThumbnail ($post_id = null, $size = 'full', $default = '')
     {
         $post_id = (null === $post_id) ? get_the_ID() : $post_id;
         if (has_post_thumbnail($post_id)) {
@@ -84,9 +84,9 @@ class Utils
             return $default;
     }
 
-    public static function getScaledFeaturedImageUrl ($post_id = null, $w, $h, $pixelRatio = 1, $size = 'full', $default = '')
+    public static function getScaledThumbnail ($post_id = null, $w, $h, $pixelRatio = 1, $size = 'full', $default = '')
     {
-        $path = self::getFeaturedImageUrl($post_id, $size, '');
+        $path = self::getThumbnail($post_id, $size, '');
         if ($path === '')
             return $default;
         return self::getScaledImageUrl($path, $w, $h, $pixelRatio);
