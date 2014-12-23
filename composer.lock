@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "968b2c47533ef69d19590571b94f0343",
+    "hash": "888192f65a2857e3d407c4e10681ed75",
     "packages": [
         {
             "name": "gregwar/cache",
@@ -51,7 +51,7 @@
         },
         {
             "name": "gregwar/image",
-            "version": "dev-master",
+            "version": "v2.0.18",
             "target-dir": "Gregwar/Image",
             "source": {
                 "type": "git",
@@ -203,9 +203,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "gregwar/image": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3"

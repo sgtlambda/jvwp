@@ -5,7 +5,7 @@
 		"php": ">=5.3",
         "twig/twig": "~1.16",
         "thesmart/singleton": "~0.0",
-        "gregwar/image": "dev-master"
+        "gregwar/image": "~2.0"
     },
     "authors": [
         {
