@@ -44,11 +44,21 @@ class PostSelect extends Field
         echo '<option value="">---</option>';
         foreach ($posts as $post) {
             $postID   = $post->ID;
-            $selected = (($value !== "" && !is_array($value) && $postID === intval($value)) || (is_array($value) && in_array($postID, $value))) ? "selected" : "";
+            $selected = self::isSelected($value, $postID) ? "selected" : "";
             echo '<option ' . $selected . ' value=' . $postID . '>' . $post->post_title . '</option>';
         }
         echo '</select>';
     }
 
+    private static function isSelected($value, $id) {
+        if($value === "" || $value === null || $value === array())
+            return false;
+        if(!is_array($value))
+            $value = array($value);
+        foreach($value as $v)
+            if(intval($v) === $id)
+                return true;
+        return false;
+    }
 
 }
