@@ -84,7 +84,7 @@ class Utils
             return $default;
     }
 
-    public static function getScaledThumbnail ($post_id = null, $w, $h, $pixelRatio = 1, $size = 'full', $default = '')
+    public static function getScaledThumbnail ($w, $h, $pixelRatio = 1, $post_id = null, $size = 'full', $default = '')
     {
         $path = self::getThumbnail($post_id, $size, '');
         if ($path === '')
