@@ -7,13 +7,24 @@ use jvwp\Utils;
 class PostSelect extends Field
 {
 
-    private $post_type, $extra_args;
+    private $post_type, $extra_args, $multiple;
 
-    public function __construct ($identifier, $label, $post_type = "post", array $extra_args = array(), $default = "")
+    /**
+     * Select box field for displaying posts of a certain post type
+     *
+     * @param string $identifier
+     * @param string $label
+     * @param string $post_type
+     * @param bool   $multiple Multiple selected posts allowed?
+     * @param array  $extra_args
+     * @param string $default
+     */
+    public function __construct ($identifier, $label, $post_type = "post", $multiple = false, array $extra_args = array(), $default = "")
     {
         parent::__construct($identifier, $label, $default);
         $this->post_type  = $post_type;
         $this->extra_args = $extra_args;
+        $this->multiple   = $multiple;
     }
 
 
@@ -26,7 +37,10 @@ class PostSelect extends Field
     {
         $posts     = Utils::getPostsByType($this->post_type, $this->extra_args);
         $fieldName = $this->getFieldName();
-        echo '<select style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '">';
+        if($this->multiple)
+            echo '<select multiple style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '[]">';
+        else
+            echo '<select style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '">';
         echo '<option value="">---</option>';
         foreach ($posts as $post) {
             $postID   = $post->ID;
