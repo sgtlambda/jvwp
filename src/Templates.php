@@ -23,9 +23,9 @@ if(class_exists('Twig_Environment')) {
          * @param string $namespace
          * @throws \Twig_Error_Loader
          */
-        public function addPath($path, $namespace = \Twig_Loader_Filesystem::MAIN_NAMESPACE)
+        public static function addPath($path, $namespace = \Twig_Loader_Filesystem::MAIN_NAMESPACE)
         {
-            $this->twigLoader->addPath($path, $namespace);
+            self::getInstance()->twigLoader->addPath($path, $namespace);
         }
 
         /**
