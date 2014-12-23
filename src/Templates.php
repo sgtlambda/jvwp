@@ -29,6 +29,15 @@ if(class_exists('Twig_Environment')) {
         }
 
         /**
+         * @param string $name
+         *
+         * @return \Twig_TemplateInterface
+         */
+        public static function getTemplate($name) {
+            return self::getInstance()->getTwigEnvironment()->loadTemplate($name);
+        }
+
+        /**
          * @return \Twig_Environment;
          */
         public function getTwigEnvironment()
