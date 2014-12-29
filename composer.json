@@ -7,6 +7,9 @@
         "thesmart/singleton": "~0.0",
         "gregwar/image": "~2.0"
     },
+    "require-dev": {
+        "johnpbloch/wordpress": "~4.1.0"
+    },
     "authors": [
         {
             "name": "JM Versteeg",
