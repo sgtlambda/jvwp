@@ -26,3 +26,9 @@ Then **jvwp** might just be for you!
 2. Run `composer update`
 3. ???
 4. Profit
+
+###Todo
+
+ - Add Widget abstraction
+ - Add Option page abstraction
+ - Add generalized field class and JannieForm field wrapper implementation thereof
