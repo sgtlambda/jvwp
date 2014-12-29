@@ -2,7 +2,7 @@
 
 namespace jvwp\shortcodes;
 
-class AbstractShortcode
+abstract class AbstractShortcode
 {
 
     private $tags;
