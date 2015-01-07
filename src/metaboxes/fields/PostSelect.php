@@ -4,62 +4,46 @@ namespace jvwp\metaboxes\fields;
 
 use jvwp\Utils;
 
-class PostSelect extends Field
+class PostSelect extends Select
 {
+    private $post_type;
+    private $extra_args;
 
-    private $post_type, $extra_args, $multiple;
-
-    /**
-     * Select box field for displaying posts of a certain post type
-     *
-     * @param string $identifier
-     * @param string $label
-     * @param string $post_type
-     * @param bool   $multiple Multiple selected posts allowed?
-     * @param array  $extra_args
-     * @param string $default
-     */
-    public function __construct ($identifier, $label, $post_type = "post", $multiple = false, array $extra_args = array(), $default = "")
+    public function __construct ($identifier, $label, $post_type = 'any', $multiple = false, array $extra_args = array(), $default = "")
     {
-        parent::__construct($identifier, $label, $default);
+        parent::__construct($identifier, $label, array(), $multiple, $default);
         $this->post_type  = $post_type;
         $this->extra_args = $extra_args;
-        $this->multiple   = $multiple;
     }
-
 
     /**
-     * Displays the field control with given value
+     * @param $currentValue
      *
-     * @param string $value
+     * @return array
      */
-    protected function output ($value)
+    protected function getOptions ($currentValue)
     {
-        $posts     = Utils::getPostsByType($this->post_type, $this->extra_args);
-        $fieldName = $this->getFieldName();
-        if ($this->multiple)
-            echo '<select multiple style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '[]">';
-        else
-            echo '<select style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . '">';
-        echo '<option value="">---</option>';
-        foreach ($posts as $post) {
-            $postID   = $post->ID;
-            $selected = self::isSelected($value, $postID) ? "selected" : "";
-            echo '<option ' . $selected . ' value=' . $postID . '>' . $post->post_title . '</option>';
+        $options = array();
+        foreach (Utils::getPostsByType($this->post_type, $this->extra_args) as $post) {
+            $options[] = array(
+                'selected' => self::isSelected($post->ID, $currentValue),
+                'value'    => $post->ID,
+                'label'    => $post->post_title
+            );
         }
-        echo '</select>';
+        return $options;
     }
 
-    private static function isSelected ($value, $id)
+    private static function isSelected ($option, $currentValue)
     {
-        if ($value === "" || $value === null || $value === array())
+        if ($currentValue === "" || $currentValue === null || $currentValue === array())
             return false;
-        if (!is_array($value))
-            $value = array($value);
-        foreach ($value as $v) {
+        if (!is_array($currentValue))
+            $currentValue = array($currentValue);
+        foreach ($currentValue as $v) {
             if ($v === "")
                 continue;
-            if (intval($v) === $id)
+            if (intval($v) === $option)
                 return true;
         }
         return false;
