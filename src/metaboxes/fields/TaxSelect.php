@@ -16,9 +16,8 @@ class TaxSelect extends Select
 
     protected function getOptions ($currentValue)
     {
-        $terms   = get_terms($this->tax, $this->extra_args);
         $options = array();
-        foreach ($terms as $term) {
+        foreach (get_terms($this->tax, $this->extra_args) as $term) {
             $value     = $term['slug'];
             $options[] = array(
                 'label'    => $term['name'],
@@ -26,6 +25,7 @@ class TaxSelect extends Select
                 'selected' => self::isSelected($term['slug'], $currentValue)
             );
         }
+        return $options;
     }
 
     private static function isSelected ($option, $currentValue)
