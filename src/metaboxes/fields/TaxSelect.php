@@ -17,7 +17,9 @@ class TaxSelect extends Select
     protected function getOptions ($currentValue)
     {
         $options = array();
-        foreach (get_terms($this->tax, $this->extra_args) as $term) {
+        foreach (get_terms($this->tax, array_merge(array(
+            'hide_empty' => false
+        ), $this->extra_args)) as $term) {
             $value     = $term['slug'];
             $options[] = array(
                 'label'    => $term['name'],
