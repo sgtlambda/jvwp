@@ -20,11 +20,11 @@ class TaxSelect extends Select
         foreach (get_terms($this->tax, array_merge(array(
             'hide_empty' => false
         ), $this->extra_args)) as $term) {
-            $value     = $term['slug'];
+            $value     = $term->slug;
             $options[] = array(
-                'label'    => $term['name'],
+                'label'    => $term->name,
                 'value'    => $value,
-                'selected' => self::isSelected($term['slug'], $currentValue)
+                'selected' => self::isSelected($term->slug, $currentValue)
             );
         }
         return $options;
