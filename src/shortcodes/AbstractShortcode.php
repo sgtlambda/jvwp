@@ -7,33 +7,37 @@ abstract class AbstractShortcode
 
     private $tags;
 
-    function __construct($tags = array(), $register = true)
+    function __construct ($tags = array(), $register = true)
     {
         $this->tags = $tags;
-        if($register){
+        if ($register) {
             $this->register();
         }
     }
 
-    protected function getDefaultAtts()
+    protected function getDefaultAtts ()
     {
         return array();
     }
 
-    protected function processAtts($atts = array())
+    protected function processAtts ($atts = array())
     {
-        return array_merge($atts, $this->getDefaultAtts());
+        if (!is_array($atts))
+            $atts = array();
+        return array_merge($this->getDefaultAtts(), $atts);
     }
 
-    protected function output($atts, $content) {
+    protected function getOutput ($atts, $content)
+    {
         return "";
     }
 
-    public final function perform($atts, $content) {
-        return $this->output($this->processAtts($atts), $content);
+    public final function perform ($atts, $content)
+    {
+        return $this->getOutput($this->processAtts($atts), $content);
     }
 
-    public function register()
+    public function register ()
     {
         foreach ($this->tags as $tag) {
             add_shortcode($tag, array($this, 'perform'));

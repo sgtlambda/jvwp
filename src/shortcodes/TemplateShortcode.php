@@ -15,7 +15,7 @@ if(class_exists('Twig_Template')) {
             parent::__construct($tags, $register);
         }
 
-        protected function output($atts, $content)
+        protected function getOutput($atts, $content)
         {
             return $this->template->render(array(
                 'content' => $content,
