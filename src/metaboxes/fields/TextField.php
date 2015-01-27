@@ -13,7 +13,7 @@ class TextField extends Field
     public function __construct ($identifier, $label, $type = self::TYPE_TEXT, $default = "")
     {
         parent::__construct($identifier, $label, $default);
-        $this->type = type;
+        $this->type = $type;
     }
 
     /**
