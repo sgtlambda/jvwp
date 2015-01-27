@@ -31,4 +31,4 @@ Then **jvwp** might just be for you!
 
  - Add Widget abstraction
  - Add Option page abstraction
- - Add JannieForm field wrapper implementation thereof
+ - Add JannieForm field wrapper
