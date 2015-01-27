@@ -23,6 +23,8 @@ class TextField extends Field
      */
     protected function output ($value)
     {
-        echo "<input type=\"{$this->type}\" value=\"{$value}\">";
+        $fieldName = $this->getFieldName();
+        echo "<input type=\"{$this->type}\" name=\"{$fieldName}\" value=\"{$value}\">";
     }
+
 }
