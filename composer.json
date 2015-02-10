@@ -1,26 +1,16 @@
 {
     "name": "jmversteeg/jvwp",
-    "description": "High-level OOP abstractions for WordPress",
+    "description": "OOP for WordPress",
     "version":     "2.1.1",
     "keywords":    [
         "wordpress"
     ],
     "homepage":    "https://github.com/jmversteeg/jvwp",
-    "require": {
-		"php": ">=5.3",
-        "twig/twig": "~1.16",
-        "thesmart/singleton": "~0.0",
-        "gregwar/image": "~2.0"
-    },
-    "require-dev": {
-        "johnpbloch/wordpress": "~4.1.0"
-    },
     "authors": [
         {
             "name":     "JM Versteeg",
             "email":    "janmerijnversteeg@gmail.com",
-            "homepage": "https://github.com/jmversteeg",
-            "role":     "developer"
+            "homepage": "https://github.com/jmversteeg"
         }
     ],
     "license":     "MIT",
@@ -32,5 +22,14 @@
     "support":     {
         "issues": "https://github.com/jmversteeg/jvwp/issues",
         "wiki":   "https://github.com/jmversteeg/jvwp/wiki"
+    },
+    "require": {
+        "php":                ">=5.3",
+        "twig/twig":          "~1.16",
+        "thesmart/singleton": "~0.0",
+        "gregwar/image":      "~2.0"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": "~4.1.0"
     }
 }
