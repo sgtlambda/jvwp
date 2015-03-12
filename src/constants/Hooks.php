@@ -1,5 +1,6 @@
 <?php
 
+namespace jvwp\constants;
 /**
  * This class should eventually include constants and documentation for every hook
  */

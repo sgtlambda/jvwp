@@ -5,12 +5,6 @@ namespace jvwp\metaboxes;
 abstract class MetaBox
 {
 
-    const SCREEN_POST       = 'post';
-    const SCREEN_PAGE       = 'page';
-    const SCREEN_DASHBOARD  = 'dashboard';
-    const SCREEN_LINK       = 'link';
-    const SCREEN_ATTACHMENT = 'attachment';
-
     const CONTEXT_NORMAL   = 'normal';
     const CONTEXT_ADVANCED = 'advanced';
     const CONTEXT_SIDE     = 'side';

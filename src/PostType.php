@@ -2,6 +2,8 @@
 
 namespace jvwp;
 
+use jvwp\constants\PostTypes;
+
 abstract class PostType
 {
 
@@ -40,9 +42,9 @@ abstract class PostType
         $this->identifier = $identifier;
         $this->options    = array_merge(array(
             'public'            => $public,
-            'inherit_type'      => 'page',
+            'inherit_type'      => PostTypes::PAGE,
             'supports'          => $supports,
-            'capability_type'   => 'page',
+            'capability_type'   => PostTypes::PAGE,
             'show_ui'           => true,
             'show_in_nav_menus' => true,
             'labels'            => array(
