@@ -2,7 +2,7 @@
 
 namespace jvwp\metaboxes\fields;
 
-use jvwp\Utils;
+use jvwp\common\Utils;
 
 class PostSelect extends Select
 {

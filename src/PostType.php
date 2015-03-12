@@ -71,6 +71,9 @@ abstract class PostType
         );
     }
 
+    /**
+     * Registers the post type globally with WordPress
+     */
     function register ()
     {
         register_post_type($this->identifier, $this->options);
