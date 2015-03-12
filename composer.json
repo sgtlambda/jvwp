@@ -24,7 +24,7 @@
     "wiki":   "https://github.com/jmversteeg/jvwp/wiki"
   },
   "require":     {
-    "php":                                     ">=5.3",
+    "php":                                     ">=5.4",
     "twig/twig":                               "~1.16",
     "gregwar/image":                           "~2.0",
     "florianwolters/component-util-singleton": "0.3.*"
