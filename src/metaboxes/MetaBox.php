@@ -21,15 +21,16 @@ abstract class MetaBox
      *
      * @param string  $id       HTML 'id' attribute of the edit screen section
      * @param string  $title    Title of the edit screen section, visible to user
-     * @param array   $screens  An array of Write screens on which to show the edit screen section
+     * @param array   $screens  An array of post types on which to show the meta box in the edit screen
      * @param string  $context  The part of the page where the edit screen section should be shown
      * @param string  $priority The priority within the context where the boxes should show
      * @param boolean $register Whether to register the meta box on instantiation
      */
-    function __construct(
+    function __construct (
         $id, $title, array $screens = array(), $context = self::CONTEXT_ADVANCED, $priority = self::PRIORITY_DEFAULT,
         $register = true
-    ) {
+    )
+    {
         $this->id       = $id;
         $this->title    = $title;
         $this->screens  = $screens;
@@ -44,14 +45,14 @@ abstract class MetaBox
      *
      * @param $post
      */
-    public abstract function display($post);
+    public abstract function display ($post);
 
     /**
      * This method is ran every time a post is saved. Update your post meta here.
      *
      * @param $post_ID
      */
-    public function save($post_ID)
+    public function save ($post_ID)
     {
 
     }
@@ -60,7 +61,7 @@ abstract class MetaBox
      * Adds the meta box using the <code>add_meta_box()</code> function.
      * This should always be called on the <code>admin_menu</code> hook.
      */
-    public function register()
+    public function register ()
     {
         $callback = array($this, 'display');
         foreach ($this->screens as $screen) {
@@ -72,7 +73,7 @@ abstract class MetaBox
         }
     }
 
-    private function getPropertyForScreen($screen, $property, $default = null)
+    private function getPropertyForScreen ($screen, $property, $default = null)
     {
         if (!is_array($property))
             return $property;
@@ -81,7 +82,7 @@ abstract class MetaBox
         else return $default;
     }
 
-    protected function addActions()
+    protected function addActions ()
     {
         add_action('admin_menu', array($this, 'register'));
         add_action('wp_insert_post', array($this, 'save'));
@@ -90,7 +91,7 @@ abstract class MetaBox
     /**
      * @return string
      */
-    public function getId()
+    public function getId ()
     {
         return $this->id;
     }
