@@ -48,7 +48,20 @@ abstract class AdminPage
      */
     protected function getDisplayFunction ()
     {
-        return array($this, 'display');
+        return array($this, 'wrap');
+    }
+
+    public function wrap ()
+    {
+        echo '<div class="wrap">';
+        $this->displayHeader();
+        $this->display();
+        echo '</div>';
+    }
+
+    public function displayHeader ()
+    {
+        echo '<h2>' . $this->pageTitle . '</h2>';
     }
 
     /**
