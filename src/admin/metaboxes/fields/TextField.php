@@ -1,6 +1,6 @@
 <?php
 
-namespace jvwp\metaboxes\fields;
+namespace jvwp\admin\metaboxes\fields;
 
 class TextField extends Field
 {

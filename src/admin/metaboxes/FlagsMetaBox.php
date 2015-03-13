@@ -5,9 +5,9 @@
  * Proprietary and confidential
  */
 
-namespace jvwp\metaboxes;
+namespace jvwp\admin\metaboxes;
 
-use jvwp\metaboxes\fields\Checkbox;
+use jvwp\admin\metaboxes\fields\Checkbox;
 
 class FlagsMetaBox extends MetaBox
 {

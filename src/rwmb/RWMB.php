@@ -2,7 +2,7 @@
 
 namespace jvwp\rwmb;
 
-use jvwp\metaboxes\MetaBox;
+use jvwp\admin\metaboxes\MetaBox;
 
 class RWMB extends MetaBox
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace jvwp\metaboxes;
+namespace jvwp\admin\metaboxes;
 
 use jvwp\constants\Hooks;
 
