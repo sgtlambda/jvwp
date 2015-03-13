@@ -2,6 +2,8 @@
 
 namespace jvwp\metaboxes\fields;
 
+use WP_Post;
+
 abstract class Field
 {
 
@@ -62,9 +64,8 @@ abstract class Field
      */
     public function save ($post_ID)
     {
-        $fieldName = $this->getFieldName();
-        if (isset($_POST[$fieldName]))
-            update_post_meta($post_ID, $this->identifier, $_POST[$fieldName]);
+        if ($this->doSave())
+            update_post_meta($post_ID, $this->identifier, $this->getPostValue());
     }
 
     /**
@@ -91,4 +92,19 @@ abstract class Field
         echo '<label for="' . $this->getFieldName() . '">' . $this->getLabel() . '</label>';
     }
 
+    /**
+     * @return bool
+     */
+    protected function doSave ()
+    {
+        return isset($_POST[$this->getFieldName()]);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getPostValue ()
+    {
+        return $_POST[$this->getFieldName()];
+    }
 }

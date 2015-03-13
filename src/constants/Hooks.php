@@ -15,5 +15,12 @@ class Hooks
      * anytime the wp_insert_post() function is invoked.
      * @link http://codex.wordpress.org/Plugin_API/Action_Reference/wp_insert_post
      */
-    const HOOK_WP_INSERT_POST = 'wp_insert_post';
+    const WP_INSERT_POST = 'wp_insert_post';
+
+    /**
+     * This action is used to add extra submenus and menu options to the admin panel's menu structure. It runs after
+     * the basic admin panel menu structure is in place.
+     * @link http://codex.wordpress.org/Plugin_API/Action_Reference/admin_menu
+     */
+    const ADMIN_MENU = 'admin_menu';
 }

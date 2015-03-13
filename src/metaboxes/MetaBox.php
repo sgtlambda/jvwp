@@ -2,6 +2,8 @@
 
 namespace jvwp\metaboxes;
 
+use jvwp\constants\Hooks;
+
 abstract class MetaBox
 {
 
@@ -54,7 +56,7 @@ abstract class MetaBox
      */
     public function save ($post_ID)
     {
-
+        // TODO should probably automatically include nonce verification or sth
     }
 
     /**
@@ -85,7 +87,7 @@ abstract class MetaBox
     protected function addActions ()
     {
         add_action('admin_menu', array($this, 'register'));
-        add_action('wp_insert_post', array($this, 'save'));
+        add_action(Hooks::WP_INSERT_POST, array($this, 'save'));
     }
 
     /**
