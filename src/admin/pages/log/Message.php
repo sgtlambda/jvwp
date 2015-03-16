@@ -5,9 +5,10 @@ namespace jvwp\admin\pages\log;
 class Message
 {
 
-    const TYPE_INFO  = 'info';
-    const TYPE_WARN  = 'warn';
-    const TYPE_FATAL = 'fatal';
+    const TYPE_SUCCESS = 'success';
+    const TYPE_INFO    = 'info';
+    const TYPE_WARN    = 'warn';
+    const TYPE_FATAL   = 'fatal';
 
     private $time;
     private $type;
@@ -50,12 +51,14 @@ class Message
             'type-' . $this->type,
             'notice'
         ];
+        if ($this->type === self::TYPE_SUCCESS)
+            $classes[] = 'notice-success';
+        if ($this->type === self::TYPE_INFO)
+            $classes[] = 'notice-info';
         if ($this->type === self::TYPE_WARN)
             $classes[] = 'notice-warning';
         if ($this->type === self::TYPE_FATAL)
             $classes[] = 'notice-error';
-        if ($this->type === self::TYPE_INFO)
-            $classes[] = 'notice-info';
         return $classes;
     }
 }
