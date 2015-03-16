@@ -2,6 +2,7 @@
 
 namespace jvwp\admin\pages;
 
+use jvwp\admin\pages\log\Message;
 use jvwp\constants\Hooks;
 
 /**
@@ -17,6 +18,12 @@ abstract class AdminPage
     protected $menuSlug;
 
     /**
+     * An array of log messages do display on this page
+     * @var Message[]
+     */
+    private $log;
+
+    /**
      * Constructs and registers a admin page. Be sure to invoke **before** the <pre>admin_menu</pre> hook.
      *
      * @param string $pageTitle
@@ -30,8 +37,30 @@ abstract class AdminPage
         $this->menuTitle  = $menuTitle;
         $this->capability = $capability;
         $this->menuSlug   = $menuSlug;
+        $this->log        = array();
 
         $this->setup();
+    }
+
+    /**
+     * Adds a message to the log
+     * @param Message $message
+     */
+    public function log(Message $message)
+    {
+        $this->log[] = $message;
+    }
+
+    /**
+     * Gets the HTML markup to display of all consecutive log messages
+     * @return string
+     */
+    public function renderLog()
+    {
+        $output = '';
+        foreach($this->log as $message)
+            $output .= $message->render();
+        return $output;
     }
 
     /**
@@ -55,6 +84,7 @@ abstract class AdminPage
     {
         echo '<div class="wrap">';
         $this->displayHeader();
+        echo $this->renderLog();
         $this->display();
         echo '</div>';
     }
@@ -70,4 +100,12 @@ abstract class AdminPage
     public abstract function addPage ();
 
     public abstract function display ();
+
+    /**
+     * Gets the URL at which this page is visible
+     * @return string
+     */
+    public function getUrl() {
+        return admin_url('admin.php?page=' . $this->menuSlug);
+    }
 }
