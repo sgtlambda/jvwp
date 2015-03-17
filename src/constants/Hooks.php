@@ -23,4 +23,5 @@ class Hooks
      * @link http://codex.wordpress.org/Plugin_API/Action_Reference/admin_menu
      */
     const ADMIN_MENU = 'admin_menu';
+    const ADMIN_INIT = 'admin_init';
 }

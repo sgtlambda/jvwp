@@ -44,9 +44,10 @@ abstract class AdminPage
 
     /**
      * Adds a message to the log
+     *
      * @param Message $message
      */
-    public function log(Message $message)
+    public function log (Message $message)
     {
         $this->log[] = $message;
     }
@@ -55,10 +56,10 @@ abstract class AdminPage
      * Gets the HTML markup to display of all consecutive log messages
      * @return string
      */
-    public function renderLog()
+    public function renderLog ()
     {
         $output = '';
-        foreach($this->log as $message)
+        foreach ($this->log as $message)
             $output .= $message->render();
         return $output;
     }
@@ -69,6 +70,15 @@ abstract class AdminPage
     private function setup ()
     {
         add_action(Hooks::ADMIN_MENU, array($this, 'addPage'));
+        add_action(Hooks::ADMIN_INIT, array($this, 'init'));
+    }
+
+    /**
+     * Called upon the <pre>admin_init</pre> hook
+     */
+    public function init ()
+    {
+        // noop
     }
 
     /**
@@ -105,7 +115,8 @@ abstract class AdminPage
      * Gets the URL at which this page is visible
      * @return string
      */
-    public function getUrl() {
+    public function getUrl ()
+    {
         return admin_url('admin.php?page=' . $this->menuSlug);
     }
 }

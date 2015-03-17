@@ -3,6 +3,7 @@
 namespace jvwp\admin\metaboxes;
 
 use jvwp\constants\Hooks;
+use WP_Post;
 
 abstract class MetaBox
 {
@@ -45,7 +46,7 @@ abstract class MetaBox
     /**
      * This method is used to output the contents of the meta box.
      *
-     * @param $post
+     * @param WP_Post $post
      */
     public abstract function display ($post);
 
@@ -98,4 +99,21 @@ abstract class MetaBox
         return $this->id;
     }
 
+    /**
+     * If the metabox is not registered as a native meta box, use this function to display it using WP markup
+     *
+     * @param WP_Post|string $post
+     */
+    public function shim ($post)
+    {
+        ?>
+        <div class="postbox ">
+            <h3 class=""><span><?php echo $this->title; ?></span></h3>
+
+            <div class="inside">
+                <?php $this->display($post); ?>
+            </div>
+        </div>
+    <?php
+    }
 } 

@@ -78,7 +78,7 @@ class Select extends Field
      */
     protected function getOpeningTag ($fieldName)
     {
-        return '<select ' . ($this->multiple ? 'multiple ' : '') . 'style="width: 100%" id="' . $fieldName . '" name="' . $fieldName . ($this->multiple ? '[]' : '') . '">';
+        return '<select ' . ($this->multiple ? 'multiple ' : '') . 'style="width: 100%; margin-top: .8em" id="' . $fieldName . '" name="' . $fieldName . ($this->multiple ? '[]' : '') . '">';
     }
 
     /**

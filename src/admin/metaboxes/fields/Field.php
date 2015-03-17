@@ -7,6 +7,11 @@ use WP_Post;
 abstract class Field
 {
 
+    /**
+     * Pass this as the Post object in order to assign the meta field to a side-wide setting
+     */
+    const SITE = '_global';
+
     private $identifier, $label, $default;
 
     /**
@@ -26,17 +31,18 @@ abstract class Field
     /**
      * Gets the value of this field for a given post
      *
-     * @param int $post_ID
+     * @param int|string $post_ID The post ID or <pre>Field::SITE</pre> if it is a global option
      *
      * @return string
      */
     public function getValue ($post_ID)
     {
-        $value = get_post_meta($post_ID, $this->identifier, true);
-        if ($value === '')
-            return $this->default;
-        else
-            return $value;
+        if ($post_ID === self::SITE)
+            return get_option($this->identifier, $this->default);
+        else {
+            $value = get_post_meta($post_ID, $this->identifier, true);
+            return $value === '' ? $this->default : $value;
+        }
     }
 
     /**
@@ -54,17 +60,22 @@ abstract class Field
     public function display ($post)
     {
         $this->outputLabel();
-        $this->output($this->getValue($post->ID));
+        $identifier = $post instanceof WP_Post ? $post->ID : $post;
+        $this->output($this->getValue($identifier));
     }
 
     /**
      * Saves the updated meta value to the database
      *
-     * @param int $post_ID
+     * @param int|string $post_ID The post ID or <pre>Field::SITE</pre> if it is a global option
      */
     public function save ($post_ID)
     {
-        if ($this->doSave())
+        if (!$this->doSave())
+            return;
+        if ($post_ID === self::SITE)
+            update_option($this->identifier, $this->getPostValue());
+        else
             update_post_meta($post_ID, $this->identifier, $this->getPostValue());
     }
 
