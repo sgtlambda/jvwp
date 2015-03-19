@@ -39,7 +39,7 @@ abstract class AdminPage
         $this->menuSlug   = $menuSlug;
         $this->log        = array();
 
-        $this->setup();
+        $this->addActions();
     }
 
     /**
@@ -65,20 +65,20 @@ abstract class AdminPage
     }
 
     /**
-     * Internal method to set up <pre>admin_menu</pre> hook
+     * Sets up the hooks
      */
-    private function setup ()
+    protected function addActions ()
     {
         add_action(Hooks::ADMIN_MENU, array($this, 'addPage'));
-        add_action(Hooks::ADMIN_INIT, array($this, 'init'));
+        add_action(Hooks::ADMIN_INIT, array($this, 'adminInit'));
     }
 
     /**
      * Called upon the <pre>admin_init</pre> hook
      */
-    public function init ()
+    public function adminInit ()
     {
-        // noop
+        set_current_screen($this->menuSlug);
     }
 
     /**
@@ -90,18 +90,29 @@ abstract class AdminPage
         return array($this, 'wrap');
     }
 
+    /**
+     * Displays the outer wrapper
+     */
     public function wrap ()
     {
         echo '<div class="wrap">';
-        $this->displayHeader();
-        echo $this->renderLog();
-        $this->display();
+        $this->page();
         echo '</div>';
     }
 
     public function displayHeader ()
     {
-        echo '<h2>' . $this->pageTitle . '</h2>';
+        echo '<h2>' . $this->pageTitle;
+        $this->displayHeaderButton();
+        echo '</h2>';
+    }
+
+    /**
+     * Display a button in the top-right of the page
+     */
+    protected function displayHeaderButton ()
+    {
+
     }
 
     /**
@@ -118,5 +129,15 @@ abstract class AdminPage
     public function getUrl ()
     {
         return admin_url('admin.php?page=' . $this->menuSlug);
+    }
+
+    /**
+     * Displays the content within the div#wrap
+     */
+    protected function page ()
+    {
+        $this->displayHeader();
+        echo $this->renderLog();
+        $this->display();
     }
 }
