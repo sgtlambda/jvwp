@@ -44,7 +44,8 @@ abstract class AdminPage
 
     public function currentlyOnPage ()
     {
-        return $_GET['page'] === $this->menuSlug;
+        $pageParam = array_key_exists('page', $_GET) ? $_GET['page'] : '';
+        return $pageParam === $this->menuSlug;
     }
 
     /**
