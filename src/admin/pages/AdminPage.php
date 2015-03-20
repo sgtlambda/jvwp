@@ -147,4 +147,26 @@ abstract class AdminPage
         echo $this->renderLog();
         $this->display();
     }
+
+    /**
+     * Displays the main / side layout skeleton, invoking the two callbacks for displaying their respective parts
+     *
+     * @param ProvidesSkeletonContent $content
+     */
+    public static function doSkeleton (ProvidesSkeletonContent $content)
+    {
+        echo '<div id="poststuff">';
+        echo '<div id="post-body" class="metabox-holder columns-2">';
+
+        echo '<div id="post-body-content" style="position: relative;">';
+        $content->renderBody();
+        echo '</div>';
+
+        echo '<div id="postbox-container-1" class="postbox-container">';
+        $content->renderSide();
+        echo '</div>';
+
+        echo '</div>'; // ends post-body
+        echo '</div>'; // ends poststuff
+    }
 }
