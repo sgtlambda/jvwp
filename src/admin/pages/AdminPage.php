@@ -42,6 +42,11 @@ abstract class AdminPage
         $this->addActions();
     }
 
+    public function currentlyOnPage ()
+    {
+        return $_GET['page'] === $this->menuSlug;
+    }
+
     /**
      * Adds a message to the log
      *
@@ -70,11 +75,13 @@ abstract class AdminPage
     protected function addActions ()
     {
         add_action(Hooks::ADMIN_MENU, array($this, 'addPage'));
-        add_action(Hooks::ADMIN_INIT, array($this, 'adminInit'));
+        if ($this->currentlyOnPage()) {
+            add_action(Hooks::ADMIN_INIT, array($this, 'adminInit'));
+        }
     }
 
     /**
-     * Called upon the <pre>admin_init</pre> hook
+     * Called upon the <pre>admin_init</pre> hook if this page is active
      */
     public function adminInit ()
     {
