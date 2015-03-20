@@ -127,6 +127,9 @@ abstract class AdminPage
      */
     public abstract function addPage ();
 
+    /**
+     * Displays the page
+     */
     public abstract function display ();
 
     /**
