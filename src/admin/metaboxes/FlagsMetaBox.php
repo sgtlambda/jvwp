@@ -13,6 +13,7 @@ class FlagsMetaBox extends MetaBox
 {
 
     private $checks;
+    private $flags;
 
     /**
      * @param string      $id
@@ -30,6 +31,7 @@ class FlagsMetaBox extends MetaBox
     {
         parent::__construct($id, $title, $screens, $context, $priority, $register);
         $this->checks = array();
+        $this->flags  = $flags;
         foreach ($flags as $key => $label) {
             $check          = new Checkbox($key, $label, false);
             $this->checks[] = $check;
@@ -56,5 +58,20 @@ class FlagsMetaBox extends MetaBox
             $check->save($post_ID);
     }
 
-
+    /**
+     * Gets an array of the identifiers for the flags that are enabled on the current (or provided) post
+     *
+     * @param int|\WP_Post $post
+     *
+     * @return string[]
+     */
+    public function getPostFlags ($post = 0)
+    {
+        $post  = get_post($post);
+        $flags = [];
+        foreach ($this->flags as $key => $label)
+            if (get_post_meta($post->ID, $key, true) === Checkbox::ON)
+                $flags[] = $key;
+        return $flags;
+    }
 }
