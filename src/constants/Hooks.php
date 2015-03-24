@@ -1,6 +1,7 @@
 <?php
 
 namespace jvwp\constants;
+
 /**
  * This class should eventually include constants and documentation for every hook
  */
@@ -73,4 +74,27 @@ class Hooks
      * @filter
      */
     const BODY_CLASS = 'body_class';
+
+    /**
+     * the_title is a filter applied to the post title retrieved from the database, prior to printing on the screen. In
+     * some cases (such as when the_title is used), the title can be suppressed by returning a false value (e.g. NULL,
+     * FALSE or the empty string) from the filter function.
+     * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/the_title
+     * @filter
+     */
+    const THE_TITLE = 'the_title';
+
+    /**
+     * The "the_content" filter is used to filter the content of the post after it is retrieved from the database and
+     * before it is printed to the screen.
+     * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/the_content
+     * @filter
+     */
+    const THE_CONTENT = 'the_content';
+
+    /**
+     * Filter used by the "subheading" plugin to filter the subtitle of a post.
+     * @filter
+     */
+    const SUBHEADING = 'subheading';
 }
