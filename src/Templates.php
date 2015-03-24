@@ -18,17 +18,23 @@ class Templates
     }
 
     /**
-     * @param string $path
-     * @param string $namespace
+     * Adds a path where templates are stored.
+     *
+     * @param string $path      A path where to look for templates
+     * @param string $namespace The namespace to associate the path with
      *
      * @throws \Twig_Error_Loader
      */
     public static function addPath ($path, $namespace = \Twig_Loader_Filesystem::MAIN_NAMESPACE)
     {
-        self::getInstance()->twigLoader->addPath($path, $namespace);
+        $twigLoader = self::getInstance()->twigLoader;
+        /* @var $twigLoader \Twig_Loader_Filesystem */
+        $twigLoader->addPath($path, $namespace);
     }
 
     /**
+     * Gets the template with the given name.
+     *
      * @param string $name
      *
      * @return \Twig_Template
