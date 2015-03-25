@@ -25,7 +25,7 @@ class Ajax
      *
      * @param $actionName
      *
-     * @return mixed
+     * @return string
      */
     public static function normalizeActionName ($actionName)
     {
