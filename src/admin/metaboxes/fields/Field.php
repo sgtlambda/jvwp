@@ -52,6 +52,11 @@ abstract class Field
      */
     abstract protected function output ($value);
 
+    public function getType ()
+    {
+        return '';
+    }
+
     /**
      * Displays the field control for a given post
      *
@@ -59,9 +64,11 @@ abstract class Field
      */
     public function display ($post)
     {
+        echo '<div class="wrap-meta-field type-' . $this->getType() . '">';
         $this->outputLabel();
         $identifier = $post instanceof WP_Post ? $post->ID : $post;
         $this->output($this->getValue($identifier));
+        echo '</div>';
     }
 
     /**

@@ -34,6 +34,11 @@ class Checkbox extends Field
         return $value === self::ON;
     }
 
+    public function getType ()
+    {
+        return 'checkbox';
+    }
+
     /**
      * Displays the field control with given value
      *
