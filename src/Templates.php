@@ -15,6 +15,19 @@ class Templates
     {
         $this->twigLoader      = new \Twig_Loader_Filesystem(array());
         $this->twigEnvironment = new \Twig_Environment($this->twigLoader);
+
+        self::extendTwig($this->twigEnvironment);
+    }
+
+    /**
+     * Adds the WP-specific filters and functions to the twig environment
+     * @param \Twig_Environment $twig_Environment
+     */
+    private static function extendTwig (\Twig_Environment $twig_Environment)
+    {
+        $twig_Environment->addFilter('__', new \Twig_SimpleFilter('__', function ($text, $domain = 'default') {
+            return __($text, $domain);
+        }));
     }
 
     /**
