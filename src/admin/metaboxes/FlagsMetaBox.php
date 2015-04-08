@@ -67,7 +67,9 @@ class FlagsMetaBox extends MetaBox
      */
     public function getPostFlags ($post = 0)
     {
-        $post  = get_post($post);
+        $post = get_post($post);
+        if ($post === null)
+            return [];
         $flags = [];
         foreach ($this->flags as $key => $label)
             if (get_post_meta($post->ID, $key, true) === Checkbox::ON)
