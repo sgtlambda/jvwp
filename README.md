@@ -28,6 +28,6 @@ Then **jvwp** might just be for you!
 
 ###Todo
 
+ - Add tests + CI
  - Add Widget abstraction
- - Add Option page abstraction
  - Add JannieForm field wrapper
