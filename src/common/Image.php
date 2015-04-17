@@ -1,6 +1,7 @@
 <?php
 
 namespace jvwp\common;
+use jvwp\constants\Hooks;
 
 /**
  * Image utilities
@@ -8,6 +9,19 @@ namespace jvwp\common;
  */
 class Image
 {
+
+    /**
+     * Hooks into the <pre>upload_mimes</pre> filter, adding the svg and svgz mime types to the array.
+     */
+    public static function enableSvgUploads ()
+    {
+        add_filter(Hooks::UPLOAD_MIMES,
+            function ($m) {
+                $m['svg']  = 'image/svg+xml';
+                $m['svgz'] = 'image/svg+xml';
+                return $m;
+            });
+    }
 
     /**
      * Gets the URL of the features image associated with post $post_id or current post
@@ -79,7 +93,7 @@ class Image
     {
         $realW = $w * $pixelRatio;
         $realH = $h * $pixelRatio;
-        $path = '/' . \Gregwar\Image\Image::open($path)
+        $path  = '/' . \Gregwar\Image\Image::open($path)
                 ->zoomCrop($realW, $realH, 0xfffff)
                 ->jpeg(90);
         return $path;

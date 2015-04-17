@@ -93,6 +93,15 @@ class Hooks
     const THE_CONTENT = 'the_content';
 
     /**
+     * This filter can be used to alter the list of acceptable file extensions WordPress checks during media uploads.
+     * Altering this list through the use of this filter can help you when you are presented with the
+     * "File type does not meet security guidelines. Try another." error message.
+     * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/upload_mimes
+     * @filter
+     */
+    const UPLOAD_MIMES = 'upload_mimes';
+
+    /**
      * Filter used by the "subheading" plugin to filter the subtitle of a post.
      * @filter
      */
