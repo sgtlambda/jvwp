@@ -35,7 +35,7 @@
     "gregwar/image":                           "~2.0",
     "cocur/slugify":                           "~1.1",
     "florianwolters/component-util-singleton": "0.3.*",
-    "jmversteeg/fieldwork":                    "dev-master"
+    "jmversteeg/fieldwork":                    "*"
   },
   "require-dev":  {
     "johnpbloch/wordpress": "~4.1.0"
