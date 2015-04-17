@@ -1,36 +1,43 @@
 {
-  "name":        "jmversteeg/jvwp",
-  "description": "OOP for WordPress",
-  "version":     "4.0.0",
-  "keywords":    [
+  "name":         "jmversteeg/jvwp",
+  "description":  "OOP for WordPress",
+  "version":      "4.0.0",
+  "keywords":     [
     "wordpress"
   ],
-  "homepage":    "https://github.com/jmversteeg/jvwp",
-  "authors":     [
+  "homepage":     "https://github.com/jmversteeg/jvwp",
+  "authors":      [
     {
       "name":     "JM Versteeg",
       "email":    "janmerijnversteeg@gmail.com",
       "homepage": "https://github.com/jmversteeg"
     }
   ],
-  "license":     "MIT",
-  "autoload":    {
+  "repositories": [
+    {
+      "type": "git",
+      "url":  "https://github.com/jmversteeg/fieldwork-web.git"
+    }
+  ],
+  "license":      "MIT",
+  "autoload":     {
     "psr-4": {
       "jvwp\\": "src/"
     }
   },
-  "support":     {
+  "support":      {
     "issues": "https://github.com/jmversteeg/jvwp/issues",
     "wiki":   "https://github.com/jmversteeg/jvwp/wiki"
   },
-  "require":     {
+  "require":      {
     "php":                                     ">=5.4",
     "twig/twig":                               "~1.16",
     "gregwar/image":                           "~2.0",
     "cocur/slugify":                           "~1.1",
-    "florianwolters/component-util-singleton": "0.3.*"
+    "florianwolters/component-util-singleton": "0.3.*",
+    "jmversteeg/fieldwork":                    "dev-master"
   },
-  "require-dev": {
+  "require-dev":  {
     "johnpbloch/wordpress": "~4.1.0"
   }
 }
