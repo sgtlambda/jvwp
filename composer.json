@@ -22,7 +22,8 @@
   "license":      "MIT",
   "autoload":     {
     "psr-4": {
-      "jvwp\\": "src/"
+      "jvwp\\": "src/",
+      "files":  ["bootstrap.php"]
     }
   },
   "support":      {
