@@ -22,9 +22,9 @@
   "license":      "MIT",
   "autoload":     {
     "psr-4": {
-      "jvwp\\": "src/",
-      "files":  ["bootstrap.php"]
-    }
+      "jvwp\\": "src/"
+    },
+    "files": ["bootstrap.php"]
   },
   "support":      {
     "issues": "https://github.com/jmversteeg/jvwp/issues",
