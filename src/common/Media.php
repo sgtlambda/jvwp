@@ -1,26 +1,37 @@
 <?php
 
 namespace jvwp\common;
+
 use jvwp\constants\Hooks;
 
 /**
  * Image utilities
  * @package jvwp
  */
-class Image
+class Media
 {
 
     /**
-     * Hooks into the <pre>upload_mimes</pre> filter, adding the svg and svgz mime types to the array.
+     * Hooks into the <pre>upload_mimes</pre> filter, adding the mime types to the array.
+     * Takes an associative array of extension => mime-type bindings
+     * @param $mimeTypes
      */
-    public static function enableSvgUploads ()
+    public static function allowUploadsOfType ($mimeTypes)
     {
         add_filter(Hooks::UPLOAD_MIMES,
-            function ($m) {
-                $m['svg']  = 'image/svg+xml';
-                $m['svgz'] = 'image/svg+xml';
-                return $m;
+            function ($m) use ($mimeTypes) {
+                return array_merge($m, $mimeTypes);
             });
+    }
+
+    /**
+     * Adds the svg mime types to the allowed upload types
+     */
+    public static function allowSvgUploads ()
+    {
+        self::allowUploadsOfType(array(
+            'svg' => 'image/svg+xml'
+        ));
     }
 
     /**
