@@ -3,6 +3,7 @@
 namespace jvwp\common;
 
 use jvwp\constants\MetaKeys;
+use WP_Post;
 
 class Page
 {
@@ -12,7 +13,7 @@ class Page
      *
      * @param string $slug
      *
-     * @return array
+     * @return WP_Post[]
      */
     public static function findByTemplateSlug ($slug)
     {
