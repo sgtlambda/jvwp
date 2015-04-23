@@ -70,15 +70,4 @@ class Utils
         }
         return $query;
     }
-
-    public static function lockTheme ($theme_name)
-    {
-        update_option('template', $theme_name);
-        add_action('admin_init', function () {
-            global $submenu;
-            unset($submenu['themes.php'][5]);
-            $submenu['themes.php'][6][2] = "customize.php?return=" . urlencode(get_admin_url());
-            unset($submenu['themes.php'][15]);
-        });
-    }
 }
