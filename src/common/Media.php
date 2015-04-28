@@ -11,6 +11,9 @@ use jvwp\constants\Hooks;
 class Media
 {
 
+    CONST SIZE_THUMBNAIL = 'thumbnail';
+    CONST SIZE_FULL      = 'full';
+
     /**
      * Hooks into the <pre>upload_mimes</pre> filter, adding the mime types to the array.
      * Takes an associative array of extension => mime-type bindings
