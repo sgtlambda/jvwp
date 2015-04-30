@@ -8,11 +8,15 @@ use FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 class Templates
 {
+
     use SingletonTrait;
 
     private $twigLoader;
     private $twigEnvironment;
 
+    /**
+     * Constructs a new template manager
+     */
     function __construct ()
     {
         $this->twigLoader      = new \Twig_Loader_Filesystem(array());
