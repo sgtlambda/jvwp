@@ -18,7 +18,7 @@ class WpEditorField extends Textarea
 
     public function getHTML ($showLabel = true)
     {
-        // Capture the output off the WordPress API function using output buffering
+        // Capture the output of the WordPress API function using output buffering
         ob_start();
         wp_editor($this->value, $this->getName(), $this->getEditorOptions());
         return ob_get_clean();
