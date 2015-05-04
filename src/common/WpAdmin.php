@@ -15,6 +15,8 @@ class WpAdmin
     public static function lockTheme ($theme_name)
     {
         update_option('template', $theme_name);
+        update_option('stylesheet', $theme_name);
+        update_option('current_theme', $theme_name);
         add_action('admin_init', function () {
             global $submenu;
             unset($submenu[self::MENU_THEMES][5]);
