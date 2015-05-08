@@ -38,6 +38,16 @@ class Media
     }
 
     /**
+     * Adds the ico mime types to the allowed upload types
+     */
+    public static function allowIcoUploads ()
+    {
+        self::allowUploadsOfType(array(
+            'ico' => 'image/x-icon'
+        ));
+    }
+
+    /**
      * Gets the URL of the features image associated with post $post_id or current post
      *
      * @param int|null $post_id
