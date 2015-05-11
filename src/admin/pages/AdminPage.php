@@ -2,6 +2,7 @@
 
 namespace jvwp\admin\pages;
 
+use jmversteeg\crudalicious\view\ModeBasedUrlProvider;
 use jvwp\admin\pages\log\Message;
 use jvwp\constants\Hooks;
 
@@ -9,8 +10,15 @@ use jvwp\constants\Hooks;
  * Represents a page in the admin backend
  * @package fibernet\wp\admin
  */
-abstract class AdminPage
+abstract class AdminPage implements ModeBasedUrlProvider
 {
+
+    const MODE_DEFAULT = 'default';
+
+    const USER_FUNC_DISPLAY = 'display';
+    const USER_FUNC_INIT    = 'init';
+
+    protected $modes;
 
     protected $pageTitle;
     protected $menuTitle;
@@ -87,6 +95,12 @@ abstract class AdminPage
     public function adminInit ()
     {
         set_current_screen($this->menuSlug);
+        if (count($this->modes)) {
+            $mode     = $this->getMode();
+            $userFunc = $this->modes[$mode][self::USER_FUNC_INIT];
+            if ($userFunc !== null)
+                call_user_func($userFunc);
+        }
     }
 
     /**
@@ -131,7 +145,15 @@ abstract class AdminPage
     /**
      * Displays the page
      */
-    public abstract function display ();
+    public function display ()
+    {
+        if (count($this->modes)) {
+            $mode     = $this->getMode();
+            $userFunc = $this->modes[$mode][self::USER_FUNC_DISPLAY];
+            if ($userFunc !== null)
+                call_user_func($userFunc);
+        }
+    }
 
     /**
      * Gets the URL at which this page is visible
@@ -140,6 +162,18 @@ abstract class AdminPage
     public function getUrl ()
     {
         return admin_url('admin.php?page=' . $this->menuSlug);
+    }
+
+    /**
+     * Gets the URL for a specific mode of this Crud Interface
+     *
+     * @param string $mode
+     *
+     * @return string
+     */
+    public function getModeUrl ($mode)
+    {
+        return $this->getUrl() . '&mode=' . $mode;
     }
 
     /**
@@ -172,5 +206,36 @@ abstract class AdminPage
 
         echo '</div>'; // ends post-body
         echo '</div>'; // ends poststuff
+    }
+
+    /**
+     * Adds a new display mode, which can be requested through the URL parameter <pre>mode</pre>
+     *
+     * @param string        $string
+     * @param callable|null $init
+     * @param callable|null $render
+     */
+    public function addMode ($string, $init, $render)
+    {
+        $this->modes[$string] = [
+            self::USER_FUNC_INIT    => $init,
+            self::USER_FUNC_DISPLAY => $render
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getMode ()
+    {
+        $mode = array_key_exists('mode', $_GET) ? $_GET['mode'] : AdminPage::MODE_DEFAULT;
+        if (!array_key_exists($mode, $this->modes))
+            $mode = AdminPage::MODE_DEFAULT;
+        return $mode;
+    }
+
+    protected function setMode ($mode)
+    {
+        $_GET['mode'] = $mode;
     }
 }
