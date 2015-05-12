@@ -113,7 +113,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
-     * Displays the outer wrapper
+     * Wraps the page. This method should reference the <pre>page()</pre> method
      */
     public function wrap ()
     {
@@ -228,14 +228,22 @@ abstract class AdminPage implements ModeBasedUrlProvider
      */
     protected function getMode ()
     {
-        $mode = array_key_exists('mode', $_GET) ? $_GET['mode'] : AdminPage::MODE_DEFAULT;
+        $mode = array_key_exists('mode', $_GET) ? $_GET['mode'] : $this->getDefaultMode();
         if (!array_key_exists($mode, $this->modes))
-            $mode = AdminPage::MODE_DEFAULT;
+            $mode = $this->getDefaultMode();
         return $mode;
     }
 
     protected function setMode ($mode)
     {
         $_GET['mode'] = $mode;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultMode ()
+    {
+        return AdminPage::MODE_DEFAULT;
     }
 }
