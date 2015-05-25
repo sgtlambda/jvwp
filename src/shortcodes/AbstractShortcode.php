@@ -15,6 +15,10 @@ abstract class AbstractShortcode
         }
     }
 
+    /**
+     * Get an array of default attributes
+     * @return array
+     */
     protected function getDefaultAtts ()
     {
         return array();
@@ -27,7 +31,13 @@ abstract class AbstractShortcode
         return array_merge($this->getDefaultAtts(), $atts);
     }
 
-    protected function getOutput ($atts, $content)
+    /**
+     * Gets the output of the shortcode
+     * @param array  $atts
+     * @param string $content
+     * @return string
+     */
+    public function getOutput ($atts = array(), $content = '')
     {
         return "";
     }
@@ -37,6 +47,9 @@ abstract class AbstractShortcode
         return $this->getOutput($this->processAtts($atts), $content);
     }
 
+    /**
+     * Registers the shortcode with WP
+     */
     public function register ()
     {
         foreach ($this->tags as $tag) {
