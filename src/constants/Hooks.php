@@ -60,6 +60,14 @@ class Hooks
     const INIT = 'init';
 
     /**
+     * This action hook is executed at the end of WordPress's built-in request parsing method in the main WP() class.
+     * Attention! Parse Request affects only the main query not queries made with wp_query, for example.
+     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/parse_request
+     * @action
+     */
+    const PARSE_REQUEST = 'parse_request';
+
+    /**
      * This action hook executes just before WordPress determines which template page to load. It is a good hook to use
      * if you need to do a redirect with full knowledge of the content that has been queried.
      * @link http://codex.wordpress.org/Plugin_API/Action_Reference/template_redirect
