@@ -47,7 +47,7 @@ class Templates
      */
     public static function addPath ($path, $namespace = \Twig_Loader_Filesystem::MAIN_NAMESPACE)
     {
-        $twigLoader = self::getInstance()->twigLoader;
+        $twigLoader = self::getTwigLoader();
         /* @var $twigLoader \Twig_Loader_Filesystem */
         $twigLoader->addPath($path, $namespace);
     }
@@ -62,6 +62,14 @@ class Templates
     public static function getTemplate ($name)
     {
         return self::getInstance()->getTwigEnvironment()->loadTemplate($name);
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getTwigLoader ()
+    {
+        return self::getInstance()->twigLoader;
     }
 
     /**
