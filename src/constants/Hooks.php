@@ -76,6 +76,14 @@ class Hooks
     const TEMPLATE_REDIRECT = 'template_redirect';
 
     /**
+     * The 'customize_register' action hook is used to customize and manipulate the Theme Customization admin screen
+     * introduced in WordPress Version 3.4. This hook is a component of the Theme Customization API.
+     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/customize_register
+     * @action
+     */
+    const CUSTOMIZE_REGISTER = 'customize_register';
+
+    /**
      * The "body_class" filter is used to filter the classes that are assigned to the body HTML element on the current
      * page.
      * @link http://codex.wordpress.org/Plugin_API/Filter_Reference/body_class
