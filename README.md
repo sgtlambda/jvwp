@@ -10,21 +10,9 @@ Then **jvwp** might just be for you!
 
 ### Installation
 
-````json
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/jmversteeg/jvwp"
-    }
-  ],
-  "require": {
-    "jmversteeg/jvwp": "dev-master"
-  }
-````
-1. Add that your `composer.json`
-2. Run `composer update`
-3. ???
-4. Profit
+1. `composer require jmversteeg/jvwp`
+2. ???
+3. Profit
 
 ###Todo
 
