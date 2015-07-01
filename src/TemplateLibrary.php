@@ -37,6 +37,17 @@ abstract class TemplateLibrary
     {
         $templateRoot = self::getInstance();
         /* @var $templateRoot \jvwp\TemplateLibrary */
-        return Templates::getTemplate('@' . $templateRoot->templateNamespace . '/' . $name);
+        $fullName = $templateRoot->getFullTemplateName($name);
+        return Templates::getTemplate($fullName);
+    }
+
+    /**
+     * Based on the short-hand name, gets the full template name
+     * @param $name
+     * @return string
+     */
+    protected function getFullTemplateName ($name)
+    {
+        return '@' . $this->templateNamespace . '/' . $name;
     }
 }
