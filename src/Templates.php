@@ -65,11 +65,25 @@ class Templates
     }
 
     /**
-     * @return mixed
+     * @return \Twig_Loader_Filesystem
      */
     public static function getTwigLoader ()
     {
         return self::getInstance()->twigLoader;
+    }
+
+    /**
+     * Determine the path of a template based on its name
+     *
+     * @param $name
+     *
+     * @return string
+     *
+     * @throws \Twig_Error_Loader
+     */
+    public static function find ($name)
+    {
+        return TemplateUtils::findTemplate(self::getTwigLoader(), $name);
     }
 
     /**
