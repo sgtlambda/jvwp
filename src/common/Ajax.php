@@ -5,6 +5,9 @@ namespace jvwp\common;
 class Ajax
 {
 
+    /**
+     * The hook prefix
+     */
     const WP_AJAX_HOOK_PREFIX = 'wp_ajax_';
 
     /**
@@ -17,6 +20,17 @@ class Ajax
     public static function getHook ($action)
     {
         return self::WP_AJAX_HOOK_PREFIX . $action;
+    }
+
+    /**
+     * Binds the callable to the given hook
+     *
+     * @param string   $action   The name of the ajax action
+     * @param callable $callable The function to bind
+     */
+    public static function register ($action, $callable)
+    {
+        add_action(self::getHook($action), $callable);
     }
 
     /**
