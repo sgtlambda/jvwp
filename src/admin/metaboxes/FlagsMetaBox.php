@@ -8,6 +8,8 @@
 namespace jvwp\admin\metaboxes;
 
 use jvwp\admin\metaboxes\fields\Checkbox;
+use jvwp\common\Post;
+use jvwp\constants\PostTypes;
 
 class FlagsMetaBox extends MetaBox
 {
@@ -36,6 +38,19 @@ class FlagsMetaBox extends MetaBox
             $check          = new Checkbox($key, $label, false);
             $this->checks[] = $check;
         }
+    }
+
+    /**
+     * Finds one or more posts that have the given flag enabled
+     *
+     * @param string $flag
+     * @param string $post_type
+     *
+     * @return \WP_Post[]
+     */
+    public static function findPostsByFlag ($flag, $post_type = PostTypes::ANY)
+    {
+        return Post::findByExactMeta($flag, Checkbox::ON, $post_type);
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace jvwp\constants;
 
-class PostTypes {
+class PostTypes
+{
+
+    const ANY = 'any';
 
     const POST       = 'post';
     const PAGE       = 'page';

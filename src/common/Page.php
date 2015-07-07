@@ -3,6 +3,7 @@
 namespace jvwp\common;
 
 use jvwp\constants\MetaKeys;
+use jvwp\constants\PostTypes;
 use WP_Post;
 
 class Page
@@ -17,23 +18,6 @@ class Page
      */
     public static function findByTemplateSlug ($slug)
     {
-        return self::findByExactMeta(MetaKeys::WP_PAGE_TEMPLATE, $slug);
-    }
-
-    /**
-     * Finds one or more pages by exactly matching the meta value
-     *
-     * @param string $meta_key
-     * @param string $meta_value
-     *
-     * @return array
-     */
-    public static function findByExactMeta ($meta_key, $meta_value)
-    {
-        return get_posts(array(
-            'post_type'  => 'page',
-            'meta_key'   => $meta_key,
-            'meta_value' => $meta_value
-        ));
+        return Post::findByExactMeta(MetaKeys::WP_PAGE_TEMPLATE, $slug, PostTypes::PAGE);
     }
 }

@@ -10,6 +10,7 @@ use jvwp\constants\Hooks;
  */
 abstract class UrlRouter
 {
+
     private $routes;
     private $queryVars;
 
