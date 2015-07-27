@@ -12,17 +12,21 @@ class WpMediaUploader extends HiddenField
     const SIZE_DEFAULT = 50;
     const SIZE_LARGE   = 100;
 
-    const TEMPLATE_MEDIA_UPLOADER = '@jvwp/wp-media-uploader.html';
-
     const LIBRARY_TYPE_IMAGE = 'image';
+    const LIBRARY_TYPE_ALL   = 'all';
 
     /**
-     * @var boolean
+     * @var boolean Whether to allow multiple files
      */
     private $allowMultiple;
     private $title;
     private $buttonText;
     private $libraryType;
+
+    /**
+     * @var boolean Whether to forcibly show the label
+     */
+    private $overrideShowLabel;
 
     /**
      * The size at which the attachment is retrieved from the server
@@ -58,21 +62,35 @@ class WpMediaUploader extends HiddenField
     }
 
     /**
+     * @param boolean $overrideShowLabel
+     * @return $this
+     */
+    public function setOverrideShowLabel ($overrideShowLabel)
+    {
+        $this->overrideShowLabel = $overrideShowLabel;
+        return $this;
+    }
+
+    /**
      * Sets the size at which the attachment is retrieved from the server
      * @param string $resolution
+     * @return $this
      */
     public function setAttachmentSize ($resolution)
     {
         $this->resolution = $resolution;
+        return $this;
     }
 
     /**
      * Sets the size at which the images are displayed, in px
      * @param string $displaySize
+     * @return $this
      */
     public function setDisplaySize ($displaySize)
     {
         $this->displaySize = $displaySize;
+        return $this;
     }
 
     /**
@@ -85,9 +103,9 @@ class WpMediaUploader extends HiddenField
     public function getHTML ($showLabel = true)
     {
         return parent::getHTML(false) .
-        Templates::getTemplate(self::TEMPLATE_MEDIA_UPLOADER)->render(array(
+        Templates::getTemplate($this->getTemplateLocation())->render(array(
             'id'          => $this->getId(),
-            'showLabel'   => $showLabel,
+            'showLabel'   => $showLabel || $this->overrideShowLabel,
             'label'       => $this->label,
             'resolution'  => $this->resolution,
             'displaySize' => $this->displaySize
@@ -97,9 +115,8 @@ class WpMediaUploader extends HiddenField
     private function getAttachment ()
     {
         if (!empty($this->value)) {
-            $imageSrc = wp_get_attachment_image_src($this->value, $this->resolution);
             return array(
-                'url' => $imageSrc[0],
+                'url' => $this->getAttachmentUrl(),
                 'id'  => $this->value
             );
         } else
@@ -117,5 +134,21 @@ class WpMediaUploader extends HiddenField
                 'multiple'    => $this->allowMultiple
             )
         ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateLocation ()
+    {
+        return '@jvwp/wp-media-uploader.html';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAttachmentUrl ()
+    {
+        return wp_get_attachment_image_src($this->value, $this->resolution)[0];
     }
 }

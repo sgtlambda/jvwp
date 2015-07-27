@@ -100,20 +100,24 @@ abstract class MetaBox
     }
 
     /**
-     * If the metabox is not registered as a native meta box, use this function to display it using WP markup
+     * If the metabox is not registered as a native meta box, use this function to render it as WP markup
      *
      * @param WP_Post|string $post
+     *
+     * @return string
      */
     public function shim ($post)
     {
+        ob_start();
         ?>
-        <div class="postbox ">
+        <div class="postbox">
             <h3 class=""><span><?php echo $this->title; ?></span></h3>
 
             <div class="inside">
                 <?php $this->display($post); ?>
             </div>
         </div>
-    <?php
+        <?php
+        return ob_get_clean();
     }
 } 

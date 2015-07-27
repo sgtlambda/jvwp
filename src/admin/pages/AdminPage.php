@@ -246,4 +246,12 @@ abstract class AdminPage implements ModeBasedUrlProvider
     {
         return AdminPage::MODE_DEFAULT;
     }
+
+    /**
+     * @return string
+     */
+    public function getMenuSlug ()
+    {
+        return $this->menuSlug;
+    }
 }
