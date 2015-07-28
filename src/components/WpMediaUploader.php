@@ -12,8 +12,20 @@ class WpMediaUploader extends HiddenField
     const SIZE_DEFAULT = 50;
     const SIZE_LARGE   = 100;
 
+    /**
+     * Image files
+     */
     const LIBRARY_TYPE_IMAGE = 'image';
-    const LIBRARY_TYPE_ALL   = 'all';
+
+    /**
+     * Document / other files
+     */
+
+    const LIBRARY_TYPE_APPLICATION = 'application';
+    /**
+     * All files
+     */
+    const LIBRARY_TYPE_ALL = '';
 
     /**
      * @var boolean Whether to allow multiple files
