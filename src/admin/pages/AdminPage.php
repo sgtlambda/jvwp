@@ -2,12 +2,14 @@
 
 namespace jvwp\admin\pages;
 
+use Exception;
 use jmversteeg\crudalicious\view\ModeBasedUrlProvider;
 use jvwp\admin\pages\log\Message;
 use jvwp\constants\Hooks;
 
 /**
  * Represents a page in the admin backend
+ *
  * @package fibernet\wp\admin
  */
 abstract class AdminPage implements ModeBasedUrlProvider
@@ -18,6 +20,9 @@ abstract class AdminPage implements ModeBasedUrlProvider
     const USER_FUNC_DISPLAY = 'display';
     const USER_FUNC_INIT    = 'init';
 
+    /**
+     * @var AdminPageMode[]
+     */
     protected $modes;
 
     protected $pageTitle;
@@ -27,6 +32,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
 
     /**
      * An array of log messages do display on this page
+     *
      * @var Message[]
      */
     private $log;
@@ -68,6 +74,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
 
     /**
      * Gets the HTML markup to display of all consecutive log messages
+     *
      * @return string
      */
     public function renderLog ()
@@ -79,13 +86,26 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
-     * Sets up the hooks
+     * Sets up the WP hooks
      */
     protected function addActions ()
     {
         add_action(Hooks::ADMIN_MENU, array($this, 'addPage'));
         if ($this->currentlyOnPage()) {
-            add_action(Hooks::ADMIN_INIT, array($this, 'adminInit'));
+            add_action(Hooks::ADMIN_INIT, [$this, 'adminInit']);
+        }
+    }
+
+    /**
+     * Performs a user func on the active mode
+     *
+     * @param callable $getMode A callable that retrieves the user func from the mode
+     * @throws Exception
+     */
+    private function doUserFunc ($getMode)
+    {
+        if (($activeMode = $this->getActiveMode()) !== null && ($userFunc = call_user_func($getMode, $activeMode)) !== null) {
+            call_user_func($userFunc, $activeMode);
         }
     }
 
@@ -95,21 +115,19 @@ abstract class AdminPage implements ModeBasedUrlProvider
     public function adminInit ()
     {
         set_current_screen($this->menuSlug);
-        if (count($this->modes)) {
-            $mode     = $this->getMode();
-            $userFunc = $this->modes[$mode][self::USER_FUNC_INIT];
-            if ($userFunc !== null)
-                call_user_func($userFunc);
-        }
+        $this->doUserFunc(function (AdminPageMode $mode) {
+            return $mode->getInitFunc();
+        });
     }
 
     /**
      * Gets the callable array pointing to this object's display method
+     *
      * @return array
      */
     protected function getDisplayFunction ()
     {
-        return array($this, 'wrap');
+        return [$this, 'wrap'];
     }
 
     /**
@@ -122,6 +140,9 @@ abstract class AdminPage implements ModeBasedUrlProvider
         echo '</div>';
     }
 
+    /**
+     * Display the page header
+     */
     public function displayHeader ()
     {
         echo '<h2>' . $this->pageTitle;
@@ -138,7 +159,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
-     * Invokes the relevant wordpress function to add the page
+     * Invokes the relevant WordPress function to add the page
      */
     public abstract function addPage ();
 
@@ -147,16 +168,14 @@ abstract class AdminPage implements ModeBasedUrlProvider
      */
     public function display ()
     {
-        if (count($this->modes)) {
-            $mode     = $this->getMode();
-            $userFunc = $this->modes[$mode][self::USER_FUNC_DISPLAY];
-            if ($userFunc !== null)
-                call_user_func($userFunc);
-        }
+        $this->doUserFunc(function (AdminPageMode $mode) {
+            return $mode->getRenderFunc();
+        });
     }
 
     /**
      * Gets the URL at which this page is visible
+     *
      * @return string
      */
     public function getUrl ()
@@ -167,13 +186,13 @@ abstract class AdminPage implements ModeBasedUrlProvider
     /**
      * Gets the URL for a specific mode of this Crud Interface
      *
-     * @param string $mode
+     * @param string $modeSlug
      *
      * @return string
      */
-    public function getModeUrl ($mode)
+    public function getModeUrl ($modeSlug)
     {
-        return $this->getUrl() . '&mode=' . $mode;
+        return $this->getUrl() . '&mode=' . $modeSlug;
     }
 
     /**
@@ -195,54 +214,80 @@ abstract class AdminPage implements ModeBasedUrlProvider
     {
         echo '<div id="poststuff">';
         echo '<div id="post-body" class="metabox-holder columns-2">';
-
         echo '<div id="post-body-content" style="position: relative;">';
         $content->renderBody();
         echo '</div>';
-
         echo '<div id="postbox-container-1" class="postbox-container">';
         $content->renderSide();
         echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
 
-        echo '</div>'; // ends post-body
-        echo '</div>'; // ends poststuff
+    /**
+     * Removes a display mode
+     *
+     * @param AdminPageMode|string $mode
+     */
+    public function removeMode ($mode)
+    {
+        if ($mode instanceof AdminPageMode)
+            $mode = $mode->getSlug();
+        unset($this->modes[$mode]);
     }
 
     /**
      * Adds a new display mode, which can be requested through the URL parameter <pre>mode</pre>
      *
-     * @param string        $string
-     * @param callable|null $init
-     * @param callable|null $render
+     * @param AdminPageMode $mode
      */
-    public function addMode ($string, $init, $render)
+    public function addMode (AdminPageMode $mode)
     {
-        $this->modes[$string] = [
-            self::USER_FUNC_INIT    => $init,
-            self::USER_FUNC_DISPLAY => $render
-        ];
+        $this->modes[$mode->getSlug()] = $mode;
     }
 
     /**
      * @return string
      */
-    protected function getMode ()
+    protected function getActiveModeSlug ()
     {
-        $mode = array_key_exists('mode', $_GET) ? $_GET['mode'] : $this->getDefaultMode();
+        if ($this->modes === null)
+            return null;
+        $mode = array_key_exists('mode', $_GET) ? $_GET['mode'] : $this->getDefaultModeSlug();
         if (!array_key_exists($mode, $this->modes))
-            $mode = $this->getDefaultMode();
+            $mode = $this->getDefaultModeSlug();
         return $mode;
     }
 
-    protected function setMode ($mode)
+    /**
+     * @return AdminPageMode
+     */
+    protected function getActiveMode ()
     {
+        $activeModeSlug = $this->getActiveModeSlug();
+        if ($activeModeSlug === null)
+            return null;
+        return $this->modes[$activeModeSlug];
+    }
+
+    /**
+     * Set the active mode
+     *
+     * @param AdminPageMode|string $mode Mode or mode slug
+     */
+    protected function setActiveMode ($mode)
+    {
+        if ($mode instanceof AdminPageMode)
+            $mode = $mode->getSlug();
         $_GET['mode'] = $mode;
     }
 
     /**
+     * Gets the slug of the default mode
+     *
      * @return string
      */
-    protected function getDefaultMode ()
+    protected function getDefaultModeSlug ()
     {
         return AdminPage::MODE_DEFAULT;
     }
