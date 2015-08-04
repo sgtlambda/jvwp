@@ -64,6 +64,13 @@ class Hooks
      */
     const PARSE_REQUEST = 'parse_request';
     /**
+     * This hook is called once any activated plugins have been loaded. Is generally used for immediate filter setup,
+     * or plugin overrides.
+     * @link https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
+     * @action
+     */
+    const PLUGINS_LOADED = 'plugins_loaded';
+    /**
      * Filter used by the "subheading" plugin to filter the subtitle of a post.
      * @filter
      */
