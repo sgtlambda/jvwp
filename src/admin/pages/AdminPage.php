@@ -63,6 +63,18 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
+     * Redirect to the default view
+     *
+     * @param ModeBasedUrlProvider $urlProvider
+     */
+    public static function resetView (ModeBasedUrlProvider $urlProvider)
+    {
+        $redirectHeader = 'Location: ' . $urlProvider->getModeUrl(self::MODE_DEFAULT);
+        header($redirectHeader);
+        exit;
+    }
+
+    /**
      * Adds a message to the log
      *
      * @param Message $message
