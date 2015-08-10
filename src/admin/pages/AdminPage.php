@@ -153,6 +153,14 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
+     * @return string
+     */
+    public function getPageTitle ()
+    {
+        return $this->pageTitle;
+    }
+
+    /**
      * Display the page header
      */
     public function displayHeader ()
