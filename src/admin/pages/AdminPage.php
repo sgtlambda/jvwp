@@ -166,14 +166,14 @@ abstract class AdminPage implements ModeBasedUrlProvider
     public function displayHeader ()
     {
         echo '<h2>' . $this->pageTitle;
-        $this->displayHeaderButton();
+        $this->renderHeaderButtons();
         echo '</h2>';
     }
 
     /**
-     * Display a button in the top-right of the page
+     * Display one or more buttons in the top-right of the page
      */
-    protected function displayHeaderButton ()
+    protected function renderHeaderButtons ()
     {
 
     }
