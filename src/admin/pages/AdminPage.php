@@ -3,7 +3,6 @@
 namespace jvwp\admin\pages;
 
 use Exception;
-use jmversteeg\crudalicious\view\ModeBasedUrlProvider;
 use jvwp\admin\pages\log\Message;
 use jvwp\constants\Hooks;
 
@@ -205,7 +204,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
     }
 
     /**
-     * Gets the URL for a specific mode of this Crud Interface
+     * Gets the URL for a specific mode of this page
      *
      * @param string $modeSlug
      *
