@@ -212,7 +212,7 @@ abstract class AdminPage implements ModeBasedUrlProvider
      */
     public function getModeUrl ($modeSlug)
     {
-        return $this->getUrl() . '&mode=' . $modeSlug;
+        return $this->getUrl() . '&mode=' . urlencode($modeSlug);
     }
 
     /**
