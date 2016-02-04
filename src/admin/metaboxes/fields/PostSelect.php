@@ -9,11 +9,29 @@ class PostSelect extends Select
     private $post_type;
     private $extra_args;
 
-    public function __construct ($identifier, $label, $post_type = 'any', $multiple = false, array $extra_args = array(), $default = "")
+    /**
+     * @var bool
+     */
+    private $orderByTitle;
+
+    /**
+     * Select box field for displaying posts of a certain post type
+     *
+     * @param string $identifier
+     * @param string $label
+     * @param string $post_type    The post type identifier
+     * @param bool   $multiple     Multiple selected posts allowed?
+     * @param array  $extra_args   Extra arguments for the query
+     * @param bool   $orderByTitle Order the posts by title in ascending order?
+     * @param string $default
+     * @internal param array $options Array of associative arrays containing selected, value and label
+     */
+    public function __construct ($identifier, $label, $post_type = 'any', $multiple = false, array $extra_args = array(), $orderByTitle = false, $default = "")
     {
         parent::__construct($identifier, $label, array(), $multiple, $default);
-        $this->post_type  = $post_type;
-        $this->extra_args = $extra_args;
+        $this->post_type    = $post_type;
+        $this->extra_args   = $extra_args;
+        $this->orderByTitle = $orderByTitle;
     }
 
     /**
@@ -24,7 +42,7 @@ class PostSelect extends Select
     protected function getOptions ($currentValue)
     {
         $options = array();
-        foreach (Utils::getPostsByType($this->post_type, $this->extra_args) as $post) {
+        foreach (Utils::getPostsByType($this->post_type, $this->extra_args, $this->orderByTitle) as $post) {
             $options[] = array(
                 'selected' => self::isSelected($post->ID, $currentValue),
                 'value'    => $post->ID,
