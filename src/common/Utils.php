@@ -8,19 +8,20 @@ class Utils
     /**
      * Gets an array of WP_Post objects based on the provided type(s)
      *
-     * @param string|array $post_type Post type or post types
-     * @param array        $extraArgs Optional array of extra arguments to pass to get_posts
+     * @param string|array $post_type    Post type or post types
+     * @param array        $extraArgs    Optional array of extra arguments to pass to get_posts
+     * @param bool         $orderByTitle Whether to order by title in ascending order
      *
      * @return array
      */
-    public static function getPostsByType ($post_type = "post", $extraArgs = array())
+    public static function getPostsByType ($post_type = "post", $extraArgs = array(), $orderByTitle = true)
     {
-        $defaultArgs = array(
+        $defaultArgs = array_merge(array(
             'post_type' => $post_type,
-            'showposts' => -1,
-            'orderby'   => 'title',
-            'order'     => 'ASC'
-        );
+            'showposts' => -1
+        ), $orderByTitle ? array(
+            'orderby' => 'title',
+            'order'   => 'ASC') : array());
         $args        = array_merge($defaultArgs, $extraArgs);
         return get_posts($args);
     }
