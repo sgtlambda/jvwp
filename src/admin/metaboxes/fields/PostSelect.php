@@ -24,9 +24,8 @@ class PostSelect extends Select
      * @param array  $extra_args   Extra arguments for the query
      * @param bool   $orderByTitle Order the posts by title in ascending order?
      * @param string $default
-     * @internal param array $options Array of associative arrays containing selected, value and label
      */
-    public function __construct ($identifier, $label, $post_type = 'any', $multiple = false, array $extra_args = array(), $orderByTitle = false, $default = "")
+    public function __construct ($identifier, $label, $post_type = 'any', $multiple = false, array $extra_args = array(), $orderByTitle = true, $default = "")
     {
         parent::__construct($identifier, $label, array(), $multiple, $default);
         $this->post_type    = $post_type;
