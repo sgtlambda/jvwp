@@ -15,6 +15,7 @@ class WpEditorField extends Textarea
     const OPTION_EDITOR_CLASS     = 'editor_class';
     const OPTION_DRAG_DROP_UPLOAD = 'drag_drop_upload';
     const OPTION_WPAUTOP          = 'wpautop';
+    const OPTION_TEENY            = 'teeny';
 
     public function getHTML ($showLabel = true)
     {
