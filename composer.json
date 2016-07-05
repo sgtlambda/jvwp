@@ -1,0 +1,44 @@
+{
+  "name":         "jmversteeg/jvwp",
+  "description":  "Object-oriented WordPress abstraction layer",
+  "keywords":     [
+    "wordpress"
+  ],
+  "homepage":     "https://github.com/jmversteeg/jvwp",
+  "authors":      [
+    {
+      "name":     "JM Versteeg",
+      "email":    "janmerijnversteeg@gmail.com",
+      "homepage": "https://github.com/jmversteeg"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url":  "https://github.com/jmversteeg/fieldwork-web.git"
+    }
+  ],
+  "license":      "MIT",
+  "autoload":     {
+    "psr-4": {
+      "jvwp\\": "src/"
+    },
+    "files": ["bootstrap.php"]
+  },
+  "support":      {
+    "issues": "https://github.com/jmversteeg/jvwp/issues",
+    "wiki":   "https://github.com/jmversteeg/jvwp/wiki"
+  },
+  "require":      {
+    "php":                                     ">=5.4",
+    "twig/twig":                               "~1.16",
+    "gregwar/image":                           "~2.0",
+    "cocur/slugify":                           "~1.1",
+    "florianwolters/component-util-singleton": "0.3.*",
+    "jmversteeg/fieldwork":                    "*",
+    "jmversteeg/fieldwork-web":                "*"
+  },
+  "require-dev":  {
+    "johnpbloch/wordpress": "~4.1.0"
+  }
+}
