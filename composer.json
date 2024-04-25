@@ -22,8 +22,7 @@
   "autoload":     {
     "psr-4": {
       "jvwp\\": "src/"
-    },
-    "files": ["bootstrap.php"]
+    }
   },
   "support":      {
     "issues": "https://github.com/jmversteeg/jvwp/issues",
@@ -31,7 +30,6 @@
   },
   "require":      {
     "php":                                     ">=5.4",
-    "twig/twig":                               "~1.16",
     "gregwar/image":                           "~2.0",
     "florianwolters/component-util-singleton": "0.3.*",
     "jmversteeg/fieldwork":                    "*",
