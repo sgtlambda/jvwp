@@ -2,8 +2,6 @@
 
 namespace jvwp;
 
-use Cocur\Slugify\Bridge\Twig\SlugifyExtension;
-use Cocur\Slugify\Slugify;
 use FlorianWolters\Component\Util\Singleton\SingletonTrait;
 
 class Templates
@@ -34,7 +32,6 @@ class Templates
         $twig_Environment->addFilter(new \Twig_SimpleFilter('__', function ($text, $domain = 'default') {
             return __($text, $domain);
         }));
-        $twig_Environment->addExtension(new SlugifyExtension(Slugify::create()));
     }
 
     /**
