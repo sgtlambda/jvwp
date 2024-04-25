@@ -1,0 +1,13 @@
+<div style="height: {{ displaySize }}px" class="jvwp-media-uploader" data-field-id="{{ id }}">
+    <div style="height: {{ displaySize }}px; width: {{ displaySize }}px"
+         class="thumbnail image-thumbnail not-set"></div>
+    <div class="labels" style="left: {{ displaySize }}px;">
+        {% if showLabel %}
+        <span class="label">{{ label }}</span>
+        {% endif %}
+        <a target="_blank" class="filename"></a>
+    </div>
+    <ul class="actions">
+        <li class="remove"><i class="icon-cancel"></i></li>
+    </ul>
+</div>
